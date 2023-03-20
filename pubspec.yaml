@@ -55,6 +55,9 @@ dependencies:
   # icons
   font_awesome_flutter: ^10.4.0
 
+  # open urls
+  url_launcher: ^6.1.10
+
 
 dev_dependencies:
   flutter_test:

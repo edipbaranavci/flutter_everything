@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_everything/core/components/button/custom_icon_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/components/button/custom_icon_button.dart';
+import '../../../../core/init/theme/colors/app_colors.dart';
+import '../../../models/tabs/tab_model.dart';
 import '../cubit/tabs_cubit.dart';
+
+part '../components/card.dart';
 
 class TabsView extends StatelessWidget {
   const TabsView({Key? key}) : super(key: key);
@@ -21,38 +26,33 @@ class TabsView extends StatelessWidget {
 class _TabsView extends StatelessWidget {
   const _TabsView({Key? key}) : super(key: key);
 
+  final String title = 'Flutter Everything';
+  final String subTitle = 'EKABAV';
+  final String gitHubButtonToolMessage = 'GitHub';
+
+  void openGitHubUrl() {
+    const String url = 'https://github.com/edipbaranavci/flutter_everything';
+    url.launchWebsiteCustom(mode: LaunchMode.externalApplication);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Center(
-        child: BlocBuilder<TabsCubit, TabsState>(
-          builder: (context, state) {
-            return GridView.count(
-              padding: context.paddingLow,
-              crossAxisCount: 2,
-              children: state.tabModelList
-                      ?.map((e) => Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: context.lowBorderRadius,
-                            ),
-                            child: InkWell(
-                              borderRadius: context.lowBorderRadius,
-                              onTap: () {},
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(e.icon),
-                                    context.emptySizedHeightBoxLow3x,
-                                    Text(e.title),
-                                  ]),
-                            ),
-                          ))
-                      .toList() ??
-                  [],
-            );
-          },
-        ),
+      body: buildBody(),
+    );
+  }
+
+  Center buildBody() {
+    return Center(
+      child: BlocBuilder<TabsCubit, TabsState>(
+        builder: (context, state) {
+          return GridView.count(
+            padding: context.paddingLow,
+            crossAxisCount: 2,
+            children: state.tabModelList?.map((e) => _Card(e)).toList() ?? [],
+          );
+        },
       ),
     );
   }
@@ -60,31 +60,33 @@ class _TabsView extends StatelessWidget {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: const Color.fromARGB(255, 113, 3, 133),
+      backgroundColor: AppColors.instance.mineShaft,
       title: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Flutter Everyhing',
+            title,
             style: context.textTheme.titleLarge?.copyWith(color: Colors.white),
           ),
           context.emptySizedHeightBoxLow,
           Text(
-            'EKABAV',
+            subTitle,
             style: context.textTheme.bodyLarge?.copyWith(color: Colors.white54),
           ),
         ],
       ),
-      actions: [
-        Center(
-          child: CustomIconButton(
-            iconData: FontAwesomeIcons.github,
-            color: Colors.white,
-            onTap: () {},
-            toolTip: 'GitHub',
-          ),
-        )
-      ],
+      actions: [buildGitHubButton()],
+    );
+  }
+
+  Center buildGitHubButton() {
+    return Center(
+      child: CustomIconButton(
+        iconData: FontAwesomeIcons.github,
+        color: Colors.white,
+        onTap: openGitHubUrl,
+        toolTip: gitHubButtonToolMessage,
+      ),
     );
   }
 }
