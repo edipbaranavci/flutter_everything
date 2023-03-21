@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-//required package kartal
 class CustomIconButton extends StatelessWidget {
   final IconData iconData;
   final VoidCallback onTap;
@@ -22,10 +21,11 @@ class CustomIconButton extends StatelessWidget {
     return InkWell(
       borderRadius: context.lowBorderRadius,
       onTap: onTap,
-      child: Padding(
+      child: Tooltip(
+        message: toolTip ?? '',
         padding: context.paddingLow,
-        child: Tooltip(
-          message: toolTip ?? '',
+        child: Padding(
+          padding: context.paddingLow,
           child: Icon(iconData, size: size, color: color),
         ),
       ),

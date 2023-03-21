@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_everything/core/init/theme/colors/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'features/views/tabs/views/tabs_view.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
+        textTheme: GoogleFonts.montserratTextTheme(),
         appBarTheme: Theme.of(context).appBarTheme.copyWith(
               backgroundColor: AppColors.instance.mineShaft,
               iconTheme: Theme.of(context).appBarTheme.iconTheme?.copyWith(

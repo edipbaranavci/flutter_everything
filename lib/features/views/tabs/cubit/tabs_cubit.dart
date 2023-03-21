@@ -21,7 +21,10 @@ class TabsCubit extends Cubit<TabsState> {
         const TabModel(
           Icons.abc,
           'Fontlar',
-          FontsView(),
+          FontsView(
+            url:
+                'https://github.com/edipbaranavci/flutter_everything/blob/main/lib/features/views/tabs/views/fonts/view/fonts_view.dart',
+          ),
         ),
       ],
     ));

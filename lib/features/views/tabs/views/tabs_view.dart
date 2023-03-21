@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/components/button/custom_icon_button.dart';
+import '../../../../core/extensions/open_website_extension.dart';
 import '../../../../core/init/theme/colors/app_colors.dart';
 import '../../../models/tabs/tab_model.dart';
 import '../cubit/tabs_cubit.dart';
@@ -29,11 +29,8 @@ class _TabsView extends StatelessWidget {
   final String title = 'Flutter Everything';
   final String subTitle = 'EKABAV';
   final String gitHubButtonToolMessage = 'GitHub';
-
-  void openGitHubUrl() {
-    const String url = 'https://github.com/edipbaranavci/flutter_everything';
-    url.launchWebsiteCustom(mode: LaunchMode.externalApplication);
-  }
+  final String gitHubUrl =
+      'https://github.com/edipbaranavci/flutter_everything';
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +81,7 @@ class _TabsView extends StatelessWidget {
       child: CustomIconButton(
         iconData: FontAwesomeIcons.github,
         color: Colors.white,
-        onTap: openGitHubUrl,
+        onTap: () => gitHubUrl.openWeb,
         toolTip: gitHubButtonToolMessage,
       ),
     );
