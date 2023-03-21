@@ -1,4 +1,4 @@
-part of '../view/tabs_view.dart';
+part of '../views/tabs_view.dart';
 
 class _Card extends StatelessWidget {
   const _Card(this.tabModel);
@@ -13,7 +13,7 @@ class _Card extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: context.lowBorderRadius,
-        onTap: () {},
+        onTap: () => context.navigateToPage(tabModel.page),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(tabModel.icon),
           context.emptySizedHeightBoxLow3x,

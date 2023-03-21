@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class TabModel extends Equatable {
   final IconData icon;
   final String title;
-  const TabModel(this.icon, this.title);
+  final Widget page;
+  const TabModel(this.icon, this.title, this.page);
 
   @override
-  List<Object?> get props => [icon, title];
+  List<Object?> get props => [icon, title, page];
 }
